@@ -1,0 +1,128 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Textures/brown_full.png" type="Texture" id=1]
+[ext_resource path="res://steve.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 274.867, 101.264 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 20.35, 35.079 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "DamageTaken"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("brown:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("brown/Area2D/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.00270439, 0.203911, 0.478137 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("brown:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.00120983, 0.0979959, 0.197807, 0.241965, 0.286124, 0.332097, 0.376256, 0.419205, 0.463968 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 3, 6, 5, 8, 9, 9, 17, 3 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("brown:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.00846878, 0.252854, 0.358109 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("brown:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.86265e-09, 0.0423439, 0.055652 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "immune"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("brown:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 66, 1, 66 ]
+}
+
+[node name="steve" type="KinematicBody2D"]
+position = Vector2( 288.191, 73.9406 )
+script = ExtResource( 2 )
+
+[node name="brown" type="Sprite" parent="."]
+position = Vector2( 41.1912, 0.311768 )
+scale = Vector2( 0.128776, 0.138847 )
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 9
+frame = 1
+
+[node name="Area2D" type="Area2D" parent="brown"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="brown/Area2D"]
+position = Vector2( 196.327, 71.1678 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.319626, 0.319626 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DamageTaken = SubResource( 3 )
+anims/brown_attack = SubResource( 4 )
+anims/brown_walk = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/immune = SubResource( 7 )
